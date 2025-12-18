@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = auth()->user();
+        return response()->json([
+            'message' => 'Welcome to the dashboard!',
+            'user_account' => $user,
+        ]);
     }
 }
