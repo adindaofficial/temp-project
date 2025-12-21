@@ -10,7 +10,7 @@ class ExampleController extends Controller
     public function index()
     {
         $user_count = User::count();
-        $user = User::all();
+        $user = User::limit(1)->get();
         return response()->json([
             'message' => 'This is the user index route.',
             'total_users' => $user_count,
