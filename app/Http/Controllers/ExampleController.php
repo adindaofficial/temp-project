@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ExampleController extends Controller
 {
@@ -15,9 +14,7 @@ class ExampleController extends Controller
     }
     public function show($id)
     {
-        // Kode ini rentan terhadap SQL Injection
-        $user = DB::select("SELECT * FROM users WHERE id = $id");
-
+        $user = User::find($id);
         if ($user) {
             return response()->json($user);
         } else {
