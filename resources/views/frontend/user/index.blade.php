@@ -5,6 +5,11 @@
 </div>
 <div class="mt-3 mb-3">
     <button type="button" data-bs-toggle="modal" data-bs-target="#TambahModal" class="btn btn-primary">add user</button>
+    <form method="POST" action="{{ route('user.reset') }}" class="d-inline">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger">reset users</button>
+    </form>
 </div>
 <div class="card">
     <div class="card-body">
