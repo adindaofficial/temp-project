@@ -10,7 +10,8 @@ class ExampleController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('frontend.user.index', compact('user'));
+        $user_count = $user->count();
+        return view('frontend.user.index', compact('user', 'user_count'));
     }
     public function show($id)
     {
