@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/user', [App\Http\Controllers\ExampleController::class, 'index']);
+Route::post('/user/tambah', [App\Http\Controllers\ExampleController::class, 'tambah'])->name('user.tambah');
 Route::get('/user/{id}', [App\Http\Controllers\ExampleController::class, 'show']);
 
 Auth::routes();

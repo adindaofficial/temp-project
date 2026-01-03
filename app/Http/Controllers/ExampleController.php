@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ExampleController extends Controller
 {
@@ -12,6 +13,15 @@ class ExampleController extends Controller
         $user = User::all();
         $user_count = $user->count();
         return view('frontend.user.index', compact('user', 'user_count'));
+    }
+    public function tambah(Request $request)
+    {
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt(Str::random(12)),
+        ]);
+        return back()->with('success', 'User added successfully.');
     }
     public function show($id)
     {

@@ -3,6 +3,9 @@
 <div>
     <h2>Total {{ $user_count }} Users</h2>
 </div>
+<div class="mt-3 mb-3">
+    <button type="button" data-bs-toggle="modal" data-bs-target="#TambahModal" class="btn btn-primary">add user</button>
+</div>
 <div class="card">
     <div class="card-body">
         <table class="table table-bordered">
@@ -25,4 +28,6 @@
         </table>
     </div>
 </div>
+@include('frontend.user.modal.tambah')
+@include('frontend.user.json.schema-org')
 @endsection
