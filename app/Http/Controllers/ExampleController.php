@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class ExampleController extends Controller
@@ -23,16 +24,34 @@ class ExampleController extends Controller
         ]);
         return back()->with('success', 'User added successfully.');
     }
-    public function tambahCaptcha(Request $request)
+    public function tambahCaptcha_client(Request $request)
     {
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt(Str::random(12)),
         ]);
-        return response()->json([
-            'message' => 'Request successful, Bypass Captcha Client Side',
-        ], 200);
+        return back()->with('success', 'User added successfully.');
+    }
+    public function tambahCaptcha_client_server(Request $request)
+    {
+        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+            'secret' => env('CLOUDFLARE_TURNSTILE_SECRET_KEY'),
+            'response' => $request->input('cf-turnstile-response'),
+            'remoteip' => $request->ip()
+        ])->json();
+
+        if (empty($response['success'])) {
+            return back()->withErrors([
+                'cf-turnstile-response' => 'Verifikasi CAPTCHA gagal. Silakan coba lagi.'
+            ]);
+        }
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt(Str::random(12)),
+        ]);
+        return back()->with('success', 'User added successfully.');
     }
     public function show($id)
     {

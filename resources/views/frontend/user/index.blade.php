@@ -6,6 +6,7 @@
 <div class="mt-3 mb-3">
     <button type="button" data-bs-toggle="modal" data-bs-target="#TambahModal" class="btn btn-primary">add user</button>
     <button type="button" data-bs-toggle="modal" data-bs-target="#TambahModalCaptcha" class="btn btn-primary">add user with captcha</button>
+    <button type="button" data-bs-toggle="modal" data-bs-target="#TambahModalCaptcha_Server" class="btn btn-primary">add user with captcha server</button>
     <form method="POST" action="{{ route('user.reset') }}" class="d-inline">
         @csrf
         @method('DELETE')
