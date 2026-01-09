@@ -42,7 +42,6 @@ class ExampleController extends Controller
             'remoteip' => $request->ip(),
         ])->json();
 
-        // Periksa apakah verifikasi CAPTCHA berhasil
         if (!isset($response['success']) || !$response['success']) {
             // Verifikasi gagal, tampilkan pesan kesalahan dan kirim status danger
             return back()->withErrors([
