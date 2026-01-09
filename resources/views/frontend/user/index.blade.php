@@ -37,5 +37,6 @@
 </div>
 @include('frontend.user.modal.tambah')
 @include('frontend.user.modal.tambah-captcha')
+@include('frontend.user.modal.tambah-captcha-server')
 @include('frontend.user.json.schema-org')
 @endsection
