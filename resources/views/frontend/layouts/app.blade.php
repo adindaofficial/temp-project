@@ -56,6 +56,16 @@
             timer: 1800
         });
     </script>
+    @elseif(session('danger'))
+    <script>
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            text: "{{ session('danger') }}",
+            showConfirmButton: false,
+            timer: 1800
+        });
+    </script>
     @endif
 
 </body>

@@ -45,7 +45,7 @@ class ExampleController extends Controller
             // Verifikasi gagal, tampilkan pesan kesalahan dan status danger
             return back()->withErrors([
                 'cf-turnstile-response' => 'Verifikasi CAPTCHA gagal. Silakan coba lagi.'
-            ])->with('status', 'danger');
+            ])->with('danger', 'CAPTCHA verification failed. Please try again.');
         }
         User::create([
             'name' => $request->name,
