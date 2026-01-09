@@ -35,23 +35,29 @@ class ExampleController extends Controller
     }
     public function tambahCaptcha_client_server(Request $request)
     {
+        // Mengirim permintaan verifikasi CAPTCHA ke Cloudflare
         $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
             'secret' => env('CLOUDFLARE_TURNSTILE_SECRET_KEY'),
             'response' => $request->input('cf-turnstile-response'),
             'remoteip' => $request->ip(),
         ])->json();
 
+        // Periksa apakah verifikasi CAPTCHA berhasil
         if (!isset($response['success']) || !$response['success']) {
-            // Verifikasi gagal, tampilkan pesan kesalahan dan status danger
+            // Verifikasi gagal, tampilkan pesan kesalahan dan kirim status danger
             return back()->withErrors([
                 'cf-turnstile-response' => 'Verifikasi CAPTCHA gagal. Silakan coba lagi.'
-            ])->with('danger', 'CAPTCHA verification failed. Please try again.');
+            ])->with('danger', 'Verifikasi CAPTCHA gagal. Silakan coba lagi.');
         }
+
+        // Jika CAPTCHA berhasil, lanjutkan dengan pembuatan user baru
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt(Str::random(12)),
         ]);
+
+        // Kembalikan dengan pesan sukses setelah pembuatan user
         return back()->with('success', 'User added successfully.');
     }
     public function show($id)
