@@ -38,10 +38,12 @@ class ExampleController extends Controller
         $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
             'secret' => env('CLOUDFLARE_TURNSTILE_SECRET_KEY'),
             'response' => $request->input('cf-turnstile-response'),
-            'remoteip' => $request->ip()
+            'remoteip' => $request->ip(),
         ])->json();
 
+        // Periksa apakah verifikasi CAPTCHA berhasil
         if (!isset($response['success']) || !$response['success']) {
+            // Verifikasi gagal, tampilkan pesan kesalahan
             return back()->withErrors([
                 'cf-turnstile-response' => 'Verifikasi CAPTCHA gagal. Silakan coba lagi.'
             ]);
