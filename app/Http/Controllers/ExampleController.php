@@ -23,6 +23,15 @@ class ExampleController extends Controller
         ]);
         return back()->with('success', 'User added successfully.');
     }
+    public function tambahCaptcha(Request $request)
+    {
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt(Str::random(12)),
+        ]);
+        return back()->with('success', 'User added successfully.');
+    }
     public function show($id)
     {
         $user = User::find($id);

@@ -32,6 +32,9 @@
     <!-- Select2 JS (di bawah jQuery) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Cloudflare Turnstile JS-->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @stack('js')
     @if(session('success'))
     <script>
