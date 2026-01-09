@@ -30,7 +30,9 @@ class ExampleController extends Controller
             'email' => $request->email,
             'password' => bcrypt(Str::random(12)),
         ]);
-        return back()->with('success', 'User added successfully.');
+        return response()->json([
+            'message' => 'Request successful, Bypass Captcha Client Side',
+        ], 200);
     }
     public function show($id)
     {
