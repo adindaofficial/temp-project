@@ -29,7 +29,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" id="submitBtn" class="btn btn-primary" disabled>Tambah User</button>
+                    <button type="submit" id="submitBtn1" class="btn btn-primary" disabled>Tambah User</button>
                 </div>
             </form>
         </div>
@@ -37,6 +37,6 @@
 </div>
 <script>
     function enableSubmit() {
-        document.getElementById('submitBtn').removeAttribute('disabled');
+        document.getElementById('submitBtn1').removeAttribute('disabled');
     }
 </script>
