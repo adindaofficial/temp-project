@@ -41,12 +41,11 @@ class ExampleController extends Controller
             'remoteip' => $request->ip(),
         ])->json();
 
-        // Periksa apakah verifikasi CAPTCHA berhasil
         if (!isset($response['success']) || !$response['success']) {
-            // Verifikasi gagal, tampilkan pesan kesalahan
+            // Verifikasi gagal, tampilkan pesan kesalahan dan status danger
             return back()->withErrors([
                 'cf-turnstile-response' => 'Verifikasi CAPTCHA gagal. Silakan coba lagi.'
-            ]);
+            ])->with('status', 'danger');
         }
         User::create([
             'name' => $request->name,
