@@ -41,7 +41,7 @@ class ExampleController extends Controller
             'remoteip' => $request->ip()
         ])->json();
 
-        if (empty($response['success'])) {
+        if (empty($response['error-codes']) && isset($response['success']) && $response['success'] == true) {
             return back()->withErrors([
                 'cf-turnstile-response' => 'Verifikasi CAPTCHA gagal. Silakan coba lagi.'
             ]);
